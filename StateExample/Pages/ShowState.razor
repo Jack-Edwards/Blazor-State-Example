@@ -1,0 +1,11 @@
+﻿@page "/show-state"
+
+<h3>ShowState</h3>
+
+<p>ThingOne: @_stateService.GetState(StateItem.ThingOne)</p>
+<p>ThingTwo: @_stateService.GetState(StateItem.ThingTwo)</p>
+
+@code {
+   [Inject]
+   private StateService _stateService { get; set; }
+}

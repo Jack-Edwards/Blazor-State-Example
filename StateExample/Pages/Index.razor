@@ -1,0 +1,42 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>State Example</h1>
+
+<p>Welcome to an app that illustrates how easy managing "state" is in Blazor web-assembly.</p>
+
+<p>Set and save the values for ThingOne and ThingTwo below, then navigate to the ShowState page to see the persisted state.</p>
+
+<form>
+   <label for="thingOne">Enter value for ThingOne:</label>
+   <input @bind=ThingOneValue id="thingOne" type="text" />
+   <button type="submit" @onclick=UpdateThingOne @onclick:preventDefault @onclick:stopPropagation>Save</button>
+</form>
+
+<form>
+   <label for="thingOne">Enter value for ThingOne:</label>
+   <input @bind=ThingTwoValue id="thingOne" type="datetime-local" />
+   <button type="submit" @onclick=UpdateThingTwo @onclick:preventDefault @onclick:stopPropagation>Save</button>
+</form>
+
+<a href="/show-state">Show state page</a>
+
+@code {
+   [Inject]
+   private StateService _stateService { get; set; }
+
+   private string ThingOneValue { get; set; } = "";
+
+   private DateTime ThingTwoValue { get; set; } = DateTime.Now;
+
+   private void UpdateThingOne()
+   {
+      _stateService.SetState(StateItem.ThingOne, ThingOneValue);
+   }
+
+   private void UpdateThingTwo()
+   {
+      _stateService.SetState(StateItem.ThingTwo, ThingTwoValue);
+   }
+}
